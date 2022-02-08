@@ -1,24 +1,178 @@
-@extends('layouts.app')
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>User</title>
+  <link rel="icon" href="{{ URL::asset('img/logo_hedo.png') }}">
+  <!-- Tell the browser to be responsive to screen width -->
+  <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+  <link rel="stylesheet" href="{{ url('adminLTE/bower_components/bootstrap/dist/css/bootstrap.min.css') }}">
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="{{ url('adminLTE/bower_components/font-awesome/css/font-awesome.min.css') }}">
+  <!-- Ionicons -->
+  <link rel="stylesheet" href="{{ url('adminLTE/bower_components/Ionicons/css/ionicons.min.css') }}">
+  <!-- Theme style -->
+  <link rel="stylesheet" href="{{ url('adminLTE/dist/css/AdminLTE.min.css') }}">
+  <!-- AdminLTE Skins. We have chosen the skin-blue for this starter
+        page. However, you can choose any other skin. Make sure you
+        apply the skin class to the body tag so the changes take effect. -->
+  <link rel="stylesheet" href="{{ url('adminLTE/dist/css/skins/skin-blue.min.css') }}">
 
-@section('content')
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <h1>INI HALAMAN USER</h1>
-            <div class="card">
-                <div class="card-header">{{ __('Dashboard') }}</div>
+  <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.3/css/jquery.dataTables.css">
+ 
 
-                <div class="card-body">
-                    @if (session('status'))
-                        <div class="alert alert-success" role="alert">
-                            {{ session('status') }}
-                        </div>
-                    @endif
+  <!-- Google Font -->
+  <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
 
-                    {{ __('You are logged in!') }}
+</head>
+<body class="hold-transition skin-blue sidebar-collapse sidebar-mini">
+<div class="wrapper">
+
+  <!-- Main Header -->
+  <header class="main-header">
+
+    <!-- Logo -->
+    <a href="" class="logo">
+      <!-- mini logo for sidebar mini 50x50 pixels -->
+      <span class="logo-mini"><b>U</b>SR</span>
+      <!-- logo for regular state and mobile devices -->
+      <span class="logo-lg"><b>{{ Auth::user()->name }}</span>
+    </a>
+
+    <!-- Header Navbar -->
+    <nav class="navbar navbar-static-top bg-secondary" role="navigation">
+      <!-- Sidebar toggle button-->
+      <a href="#" class="sidebar-toggle" data-toggle="push-menu" role="button">
+        <span class="sr-only">Toggle navigation</span>
+      </a>
+      <!-- Navbar Right Menu -->
+      <div class="navbar-custom-menu">
+        <ul class="nav navbar-nav">
+            <li class="nav-item dropdown">
+                <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                    {{ Auth::user()->name }}
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <center>
+                    <a class="dropdown-item" href="{{ route('logout') }}"
+                       onclick="event.preventDefault();
+                                     document.getElementById('logout-form').submit();">
+                        {{ __('Logout') }}
+                    </a>
+                </center>
+                    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                        {{ csrf_field() }}
+                    </form>
                 </div>
-            </div>
-        </div>
+            </li>
+        </ul>
+      </div>
+    </nav>
+  </header>
+  <!-- Left side column. contains the logo and sidebar -->
+  <aside class="main-sidebar">
+
+    <!-- sidebar: style can be found in sidebar.less -->
+    <section class="sidebar">
+      <!-- Sidebar Menu -->
+      <ul class="sidebar-menu" data-widget="tree">
+        <li class="header">ABSENSI</li>
+        <li class="active treeview">
+            <a href="#">
+                <i class="fa fa-book"></i>
+                <span>Input Absensi</span>
+                <span class="pull-right-container">
+                    <i class="fa fa-angle-left pull-right"></i>
+                </span>
+            </a>
+            <ul class="treeview-menu">
+                <li class="">
+                    <a href="{{ url('user/absenmasuk') }}"
+                        ><i class="fa fa-sign-in"></i>
+                        Absen Masuk</a
+                    >
+                </li>
+                <li class="">
+                  <a href="{{ url('user/absenkeluar') }}"
+                      ><i class="fa fa-sign-out"></i>
+                      Absen Keluar</a
+                  >
+              </li>
+            </ul>
+        <li class="header">INPUT DATA</li>
+        <li class="active treeview">
+            <a href="#">
+                <i class="fa fa-folder-o"></i>
+                <span>Input</span>
+                <span class="pull-right-container">
+                    <i class="fa fa-angle-left pull-right"></i>
+                </span>
+            </a>
+            <ul class="treeview-menu">
+                <li class="">
+                  <a href="{{ url('user/inputfile') }}"
+                      ><i class="fa fa-book"></i>
+                      Sertifikat</a
+                  >
+              </li>
+            </ul>
+        </li>
+      </ul>
+      <!-- /.sidebar-menu -->
+    </section>
+    <!-- /.sidebar -->
+  </aside>
+
+  <!-- Content Wrapper. Contains page content -->
+  <div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header text-center">
+      <h1 class="text-center">
+        <strong>ABSENSI & INPUT FILE<br>PT. HEDO GLOBAL TECHNOLOGY</strong><br>
+      </h1>
+      <img src="{{ URL::asset('img/logo_hedo.png') }}" alt="logo" width="15%">
+    </section><br>
+
+    <!-- Main content -->
+    <section class="content mr-auto">
+
+    </section>
+    <!-- /.content -->
+  </div>
+  <!-- /.content-wrapper -->
+
+  
+
+  <!-- Main Footer -->
+  <footer class="main-footer">
+    <!-- To the right -->
+    <div class="pull-right hidden-xs">
+        {{-- <img src="{{ URL::asset('assets/img/ig.png') }}" alt="Instagram">
+      <a href="https://www.instagram.com/kantahkabbanyuasin/" target="_blank">kantahkabbanyuasin</a> --}}
     </div>
-</div>
-@endsection
+    <!-- Default to the left -->
+    <strong>Copyright &copy; 2021 PT. Hedo GLobal Technology</strong>
+  </footer>
+
+<!-- REQUIRED JS SCRIPTS -->
+
+<!-- jQuery 3 -->
+<script src="{{ url('adminLTE/bower_components/jquery/dist/jquery.min.js') }}"></script>
+<!-- Bootstrap 3.3.7 -->
+<script src="{{ url('adminLTE/bower_components/bootstrap/dist/js/bootstrap.min.js') }}"></script>
+<!-- AdminLTE App -->
+<script src="{{ url('adminLTE/dist/js/adminlte.min.js') }}"></script>
+
+@include('sweetalert::alert')
+
+{{-- <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.js"></script> --}}
+
+{{-- <script>
+  $(document).ready( function () {
+    $('#data').DataTable();
+} );
+</script> --}}
+</body>
+</html>
