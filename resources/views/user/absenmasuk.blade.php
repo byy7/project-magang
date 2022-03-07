@@ -143,8 +143,33 @@
                 </div>
             </div>
         </div>
+        <br>
+        <h3 class="text-center"><b>DATA ABSENSI KARYAWAN</b></h3><br>
+        <div class="table-responsive">
+          <table border="1" class="table table-dark table-hover bg-info text-center">
+            <thead>
+              <tr>
+                <th scope="col">No</th>
+                <th scope="col">Id User</th>
+                <th scope="col">Tanggal</th>
+                <th scope="col">Absensi Masuk</th>
+              </tr>
+            </thead>
+            @foreach($absen as $a)
+            <tbody>
+              <tr>
+                <th scope="row">{{ $loop->iteration }}</th>
+                <td>{{ $a->user_id }}</td>
+                <td>{{ $a->tgl }}</td>
+                <td>{{ $a->jammasuk }}</td>
+              </tr>
+            @endforeach
+            </tbody>
+          </table>
+        </div>
     </section>
     <!-- /.content -->
+    
   </div>
   <!-- /.content-wrapper -->
   

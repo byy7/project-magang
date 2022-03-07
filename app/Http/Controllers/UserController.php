@@ -19,7 +19,8 @@ class UserController extends Controller
     }
 
     public function absenmasuk(){
-        return view('user.absenmasuk');
+        $dataabsen = DB::table('absensi')->get();
+        return view('user.absenmasuk',['absen'=>$dataabsen]);
     }
 
     public function dataabsenmasuk(Request $request){
@@ -49,7 +50,8 @@ class UserController extends Controller
     }
 
     public function absenkeluar(){
-        return view('user.absenkeluar');
+        $dataabsen = DB::table('absensi')->get();
+        return view('user.absenkeluar',['absen'=>$dataabsen]);
     }
 
     public function dataabsenkeluar(){

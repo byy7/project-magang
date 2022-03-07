@@ -91,7 +91,7 @@ class AdminController extends Controller
     }
 
     public function datauser(){
-        $datauser = DB::table('users')->paginate(10);
+        $datauser = DB::table('users')->where('role','user')->paginate(10);
         return view('admin/datauser',['users'=>$datauser]);
     }
 
