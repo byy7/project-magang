@@ -19,7 +19,7 @@ class UserController extends Controller
     }
 
     public function absenmasuk(){
-        $dataabsen = DB::table('absensi')->get();
+        $dataabsen = DB::table('absensi')->where('user_id','=',auth()->user()->id)->get();
         return view('user.absenmasuk',['absen'=>$dataabsen]);
     }
 
@@ -50,7 +50,7 @@ class UserController extends Controller
     }
 
     public function absenkeluar(){
-        $dataabsen = DB::table('absensi')->get();
+        $dataabsen = DB::table('absensi')->where('user_id','=',auth()->user()->id)->get();
         return view('user.absenkeluar',['absen'=>$dataabsen]);
     }
 
@@ -67,7 +67,7 @@ class UserController extends Controller
 
         $dt=[
             'jamkeluar' => $localtime,
-            'jamkerja' => date(strtotime($localtime) - strtotime($absensi->jammasuk))
+            'jamkerja'  => date(strtotime($localtime) - strtotime($absensi->jammasuk))
         ];
 
         if ($absensi->jamkeluar == ""){
